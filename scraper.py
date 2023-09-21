@@ -1,8 +1,4 @@
 '''
-A bot to scrape the TTC's most latest tweets (Xs?)
-
-Every 20 seconds, the bot will scrape the TTCnotice twitter account for their latest Tweet and prints out whatever it finds.
-
 Some caveats:
 This will have to keep running, which poses two problems. First, we have to find a system to keep this running on. This isn't
 too draining because it does not create any files. However, it does keep Google Chrome on perepetually, which is in and of itself
@@ -62,7 +58,6 @@ from selenium.webdriver.common.by import By
 import time
 
 # Functions
-
 def newest_tweet_IDretrieval(username):
 	all_tweets = app.get_tweets(username)
 	for tweet in all_tweets:
