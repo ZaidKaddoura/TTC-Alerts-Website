@@ -1,22 +1,55 @@
 class station 
 {
-    constructor(name,coordinates) 
+    constructor(Name,X,Y) 
     {
-        this.name = name;
-        this.x = x;
-        this.y = y;
+        this.Name = Name;
+        this.X = X;
+        this.Y = Y;
+    }
+
+    get name() 
+    {
+        return this.Name;
+    }
+
+    get x()
+    {
+        return this.X;
+    }
+
+    get y()
+    {
+        return this.Y;
     }
 }
 
 class line 
 {
-    constructor(name)
+    constructor(Name,X,Y)
     {
-        this.name;
+        this.Name = Name;
+        this.X = X;
+        this.Y = Y;
+    }
+
+    get name() 
+    {
+        return this.Name;
+    }
+
+    get x()
+    {
+        return this.X;
+    }
+
+    get y()
+    {
+        return this.Y;
     }
 }
 
 const stations = [];
+const lines = [];
 
 const Finch = new station('Finch', 10,40);
 stations.push(Finch);
@@ -227,3 +260,50 @@ stations.push(Leslie);
 
 const DonMills = new station("Don Mills", 15.6, 56.5);
 stations.push(DonMills);
+
+
+
+const line1 = new line("Line 1", 63.5, 55.5);
+lines.push(line1)
+
+const line2 = new line("Line 2", 66, 55.5);
+lines.push(line2)
+
+const line4 = new line("Line 4", 71.5, 55.5);
+lines.push(line4)
+
+
+
+//alert obtained from the spreadsheet
+const ttcMessage = "Line 1 Yonge-University: Trains are not stopping at Bloor-Yonge due to a security incident."; 
+
+
+let tempLine = "";
+
+
+if (ttcMessage.includes("line"))
+{
+    for (let i = 0; i < lines.length; i++)
+    {
+        tempLine = lines[i].Name;
+        if (ttcMessage.includes(tempLine))
+        {
+            //change the location of the pin to be on the line
+        }
+    }
+}
+
+else if (!ttcMessage.includes("line"))
+{
+    //obtain the substring from the first 3 words of the tweet when it is a station. 
+    const newMessage = ttcMessage.substring(0,4) // change this to get the first 4 words NOT letters
+
+    for (let i = 0; i < stations.length; i++)
+    {
+        tempLine = stations[i].Name;
+        if (newMessage.includes(tempLine))
+        {
+            //change the location of the pin to be on the station with the alert message
+        }
+    }
+}
