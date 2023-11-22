@@ -42,9 +42,10 @@
 }
 
 #pin-1 {
-    top: 15.6%;
-    left: 56.65%;
+    top: 0%;
+    left: 0%;
 }
+
 
 .box:hover > .pin-text {
   display: block;

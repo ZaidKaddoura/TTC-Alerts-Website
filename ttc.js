@@ -1,3 +1,6 @@
+$(document).ready(function() {
+
+
 class station 
 {
     constructor(Name,X,Y) 
@@ -274,36 +277,39 @@ lines.push(line4)
 
 
 
-//alert obtained from the spreadsheet
-const ttcMessage = "Line 1 Yonge-University: Trains are not stopping at Bloor-Yonge due to a security incident."; 
+
+const ttcMessage = "Leslie not working"; 
 
 
 let tempLine = "";
 
 
-if (ttcMessage.includes("line"))
-{
-    for (let i = 0; i < lines.length; i++)
-    {
-        tempLine = lines[i].Name;
-        if (ttcMessage.includes(tempLine))
-        {
-            //change the location of the pin to be on the line
+    if (ttcMessage.includes("line")) {
+        for (let i = 0; i < lines.length; i++) {
+            tempLine = lines[i].Name;
+            if (ttcMessage.includes(tempLine)) {
+                console.log("Setting pin position to line: ", lines[i].X, lines[i].Y);
+                // Change the location of the pin to be on the line
+                $("#pin-1").css({
+                    "left": lines[i].Y + '%',
+                    "top": lines[i].X + '%'
+                });
+                $("#pin-1 .pin-text h3").text(ttcMessage);
+            }
+        }
+    } else {
+        for (let i = 0; i < stations.length; i++) {
+            tempLine = stations[i].Name;
+            if (ttcMessage.includes(tempLine)) {
+                console.log("Setting pin position to station: ", stations[i].X, stations[i].Y);
+                // Change the location of the pin to be on the station with the alert message
+                $("#pin-1").css({
+                    "left": stations[i].Y + '%',
+                    "top": stations[i].X + '%'
+                });
+                $("#pin-1 .pin-text h3").text(ttcMessage);
+                
+            }
         }
     }
-}
-
-else if (!ttcMessage.includes("line"))
-{
-    //obtain the substring from the first 3 words of the tweet when it is a station. 
-    const newMessage = ttcMessage.substring(0,4) // change this to get the first 4 words NOT letters
-
-    for (let i = 0; i < stations.length; i++)
-    {
-        tempLine = stations[i].Name;
-        if (newMessage.includes(tempLine))
-        {
-            //change the location of the pin to be on the station with the alert message
-        }
-    }
-}
+});
