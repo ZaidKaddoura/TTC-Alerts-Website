@@ -23,7 +23,6 @@
   border:5px;
   position: relative;
   display: inline-block;
-
 }
 
 .map img {
@@ -41,10 +40,7 @@
   position: absolute;
 }
 
-#pin-1 {
-    top: 0%;
-    left: 0%;
-}
+
 
 
 .box:hover > .pin-text {

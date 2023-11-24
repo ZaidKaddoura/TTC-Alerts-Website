@@ -26,30 +26,7 @@ class station
     }
 }
 
-class line 
-{
-    constructor(Name,X,Y)
-    {
-        this.Name = Name;
-        this.X = X;
-        this.Y = Y;
-    }
 
-    get name() 
-    {
-        return this.Name;
-    }
-
-    get x()
-    {
-        return this.X;
-    }
-
-    get y()
-    {
-        return this.Y;
-    }
-}
 
 const stations = [];
 const lines = [];
@@ -264,52 +241,63 @@ stations.push(Leslie);
 const DonMills = new station("Don Mills", 15.6, 56.5);
 stations.push(DonMills);
 
+const line1 = new station("Line 1", 63.5, 55.5);
+stations.push(line1)
 
+const line2 = new station("Line 2", 66, 55.5);
+stations.push(line2)
 
-const line1 = new line("Line 1", 63.5, 55.5);
-lines.push(line1)
-
-const line2 = new line("Line 2", 66, 55.5);
-lines.push(line2)
-
-const line4 = new line("Line 4", 71.5, 55.5);
-lines.push(line4)
+const line4 = new station("Line 4", 71.5, 55.5);
+stations.push(line4)
 
 
 
 
-const ttcMessage = "Leslie not working"; 
+const ttcMessage = "Don Mills not working"; 
 
 
-let tempLine = "";
+    //function to create a pin
+    function createPin(station) {
+        const pin = $('<div>', { class: 'box', id: 'pin-' + station.Name });
+        pin.css({
+            "left": station.Y + '%',
+            "top": station.X + '%'
+        });
 
-
-    if (ttcMessage.includes("line")) {
-        for (let i = 0; i < lines.length; i++) {
-            tempLine = lines[i].Name;
-            if (ttcMessage.includes(tempLine)) {
-                console.log("Setting pin position to line: ", lines[i].X, lines[i].Y);
-                // Change the location of the pin to be on the line
-                $("#pin-1").css({
-                    "left": lines[i].Y + '%',
-                    "top": lines[i].X + '%'
-                });
-                $("#pin-1 .pin-text h3").text(ttcMessage);
-            }
-        }
-    } else {
-        for (let i = 0; i < stations.length; i++) {
-            tempLine = stations[i].Name;
-            if (ttcMessage.includes(tempLine)) {
-                console.log("Setting pin position to station: ", stations[i].X, stations[i].Y);
-                // Change the location of the pin to be on the station with the alert message
-                $("#pin-1").css({
-                    "left": stations[i].Y + '%',
-                    "top": stations[i].X + '%'
-                });
-                $("#pin-1 .pin-text h3").text(ttcMessage);
-                
-            }
-        }
+        const pinText = $('<div>', { class: 'pin-text' }).append($('<h3>').text(ttcMessage));
+        pin.append(pinText);
+        $('.map').append(pin);
     }
+
+
+    
+    //function to remove a pin
+    function RemovePin(station) {
+        const pin = $('<div>', { class: 'box', id: 'pin-' + station.Name });
+        pin.css({
+            "left": 0 + '%',
+            "top": 0 + '%',
+            "opacity": 0 + '%'
+        });
+}
+
+
+    // Function to display pins based on the ttcMessage
+    function displayPinsBasedOnMessage(message) {
+        stations.forEach(function(station) {
+            
+            if (message.includes(station.Name) && message.includes("resumed")) {
+                RemovePin(station);
+            }
+
+            else if (message.includes(station.Name)) {
+                createPin(station);
+            }
+        });
+
+    }
+
+    // Call the function with the ttcMessage
+    displayPinsBasedOnMessage(ttcMessage);
+    
 });
